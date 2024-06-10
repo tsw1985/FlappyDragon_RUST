@@ -1,0 +1,1 @@
+/media/gabriel/1C20FACF20FAAF40/DEVELOPER/RUST/code/FlappyDragon_RUST/flappy_dragon/target/release/flappy_dragon: /media/gabriel/1C20FACF20FAAF40/DEVELOPER/RUST/code/FlappyDragon_RUST/flappy_dragon/src/main.rs

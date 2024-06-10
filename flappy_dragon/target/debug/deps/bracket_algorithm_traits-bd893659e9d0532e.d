@@ -1,0 +1,8 @@
+/media/gabriel/1C20FACF20FAAF40/DEVELOPER/RUST/code/FlappyDragon_RUST/flappy_dragon/target/debug/deps/libbracket_algorithm_traits-bd893659e9d0532e.rmeta: /home/gabriel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bracket-algorithm-traits-0.8.7/src/lib.rs /home/gabriel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bracket-algorithm-traits-0.8.7/src/algorithm2d.rs /home/gabriel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bracket-algorithm-traits-0.8.7/src/algorithm3d.rs /home/gabriel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bracket-algorithm-traits-0.8.7/src/basemap.rs
+
+/media/gabriel/1C20FACF20FAAF40/DEVELOPER/RUST/code/FlappyDragon_RUST/flappy_dragon/target/debug/deps/bracket_algorithm_traits-bd893659e9d0532e.d: /home/gabriel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bracket-algorithm-traits-0.8.7/src/lib.rs /home/gabriel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bracket-algorithm-traits-0.8.7/src/algorithm2d.rs /home/gabriel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bracket-algorithm-traits-0.8.7/src/algorithm3d.rs /home/gabriel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bracket-algorithm-traits-0.8.7/src/basemap.rs
+
+/home/gabriel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bracket-algorithm-traits-0.8.7/src/lib.rs:
+/home/gabriel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bracket-algorithm-traits-0.8.7/src/algorithm2d.rs:
+/home/gabriel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bracket-algorithm-traits-0.8.7/src/algorithm3d.rs:
+/home/gabriel/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bracket-algorithm-traits-0.8.7/src/basemap.rs:
