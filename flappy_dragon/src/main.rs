@@ -210,7 +210,7 @@ impl State {
 
     fn main_menu(&mut self, ctx : &mut BTerm){
         ctx.cls();
-        ctx.print_centered(5,"Bienvenido al juego");
+        ctx.print_centered(5,"Welcome. Press key :");
         ctx.print_centered(8,"(P) Play");
         ctx.print_centered(9,"(Q) Exit");
 
