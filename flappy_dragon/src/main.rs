@@ -24,11 +24,55 @@ impl Obstacle{
                             size : i32::max(2,20 -score)
                             }
     }
+
+    //render obstacles
+    fn render(&mut self, ctx : &mut BTerm , player_x : i32){
+        
+        let screen_x = self.x - player_x;
+        let half_size = self.size / 2;
+
+        //Draw the top half of the obstacle
+        for y in 0..self.gap_y - half_size{
+
+            ctx.set(
+                    screen_x, 
+                    y, 
+                    RED,
+                    BLACK,
+                    to_cp437('/')
+                   );
+        }
+
+        //Draw the bottom half of the obstacle
+        for y in self.gap_y + half_size..SCREEN_WIDTH{
+            
+            ctx.set(
+                screen_x, 
+                y, 
+                RED,
+                BLACK,
+                to_cp437('/')
+            );
+
+
+        }
+    }
+
+
+    //hit obstacle
+    fn hit_obstacle(&self,player : &Player) -> bool {
+
+        let half_size = self.size / 2;
+        let does_x_match = player.x == self.x;
+        let player_above_gap = player.y < self.gap_y - half_size;
+        let player_below_gap = player.y > self.gap_y + half_size;
+        return does_x_match && (player_above_gap || player_below_gap);
+    }
+
+
+
+
 }
-
-
-
-
 
 
 // PLAYER
@@ -88,7 +132,10 @@ enum GameMode{
 struct State{
     player : Player,
     frame_time : f32,
-    mode : GameMode
+    obstacle : Obstacle,
+    mode : GameMode ,
+    score : i32
+
 }
 impl GameState for State {
 
@@ -104,16 +151,20 @@ impl GameState for State {
 }
 
 impl State {
+
     fn new() -> Self{
 
         return State {
                         player : Player::new(5,25),
                         frame_time : 0.0,
+                        obstacle : Obstacle::new(SCREEN_WIDTH, 0),
                         mode : GameMode::Menu,
+                        score : 0
                      }
     }
 
     fn play(&mut self, ctx : &mut BTerm){
+
         ctx.cls_bg(NAVY);
         self.frame_time += ctx.frame_time_ms;
         if self.frame_time > FRAME_DURATION {
@@ -127,11 +178,24 @@ impl State {
         }
 
         self.player.render(ctx);
-        ctx.print(0,0, "Pulsa Espacio para saltar");
-        if self.player.y > SCREEN_HEIGHT {
+        ctx.print(0,0, "Press space to jump");
+
+
+        // paint obstacles
+        ctx.print(0,1,&format!("SCORE: {}",self.score));
+
+        self.obstacle.render(ctx, self.player.x);
+
+        if self.player.x > self.obstacle.x {
+            self.score +=1;
+            self.obstacle = Obstacle::new(self.player.x + SCREEN_WIDTH, self.score);
+        }
+
+        if self.player.y > SCREEN_HEIGHT || self.obstacle.hit_obstacle(&self.player){
             self.mode = GameMode::End;
         }
-        
+
+
     }
 
     
@@ -140,6 +204,8 @@ impl State {
         self.player = Player::new(5,25);
         self.frame_time = 0.0;
         self.mode = GameMode::Playing;
+        self.obstacle = Obstacle::new(SCREEN_WIDTH,0);
+        self.score = 0;
     }
 
     fn main_menu(&mut self, ctx : &mut BTerm){
@@ -164,31 +230,29 @@ impl State {
 
     fn dead(&mut self, ctx : &mut BTerm){
         ctx.cls();
-        ctx.print_centered(5,"Has perdido");
-        ctx.print_centered(8,"(P) Play");
-        ctx.print_centered(9,"(Q) Exit");
+        ctx.print_centered(5,"You lose !!");
+        ctx.print_centered(8,&format!("Score: {}",self.score));
+        ctx.print_centered(9,"(P) Play again");
+        ctx.print_centered(10,"(Q) Exit");
 
         if let Some(key) = ctx.key {
 
             match key {
+
                 VirtualKeyCode::P => self.restart(ctx),
                 VirtualKeyCode::Q => ctx.quitting = true,
                 _ => {}
+
             }
 
         }
-
-
     }
 
 }
 
 
-
-
-
 fn main() -> BError{
-    let context = BTermBuilder::simple80x50().with_title("Mi primer paso con un video juego tio !").build()?;
+    let context = BTermBuilder::simple80x50().with_title("My Flappy Dragon").build()?;
     main_loop(context, State::new())
 
 }
